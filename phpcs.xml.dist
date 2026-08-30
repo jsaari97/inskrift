@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<ruleset name="Inskrift">
+	<description>WordPress coding rules for Inskrift.</description>
+	<file>inskrift.php</file>
+	<file>src</file>
+	<file>tests</file>
+	<exclude-pattern>tests/phpstan-stubs/*</exclude-pattern>
+	<arg name="basepath" value="."/>
+	<arg name="colors"/>
+	<arg value="sp"/>
+	<rule ref="WordPress-Extra">
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
+	</rule>
+	<rule ref="WordPress-Docs"/>
+	<config name="minimum_supported_wp_version" value="6.7"/>
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="inskrift"/>
+				<element value="Inskrift"/>
+				<element value="INSKRIFT"/>
+			</property>
+		</properties>
+	</rule>
+</ruleset>

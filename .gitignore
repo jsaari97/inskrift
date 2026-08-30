@@ -1,0 +1,10 @@
+/.npm-cache/
+/.phpunit.cache/
+/.phpunit.result.cache
+/build/
+/coverage/
+/node_modules/
+/vendor/
+/.wp-env.override.json
+/.wp-env.minimum.override.json
+

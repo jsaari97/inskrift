@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          coverage: none
+      - run: composer install --no-interaction --prefer-dist
+      - run: npm ci
+      - run: composer check
+      - run: npm run check
+
+  integration:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - environment: minimum
+            config: .wp-env.minimum.json
+          - environment: current
+            config: .wp-env.json
+    name: WordPress ${{ matrix.environment }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npx wp-env start --config=${{ matrix.config }}
+      - run: npx wp-env run cli --config=${{ matrix.config }} --env-cwd=wp-content/plugins/inskrift composer install -- --no-interaction --prefer-dist
+      - run: npx wp-env run cli --config=${{ matrix.config }} --env-cwd=wp-content/plugins/inskrift composer test:integration
+      - if: always()
+        run: npx wp-env stop --config=${{ matrix.config }}

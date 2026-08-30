@@ -1,0 +1,38 @@
+{
+	"name": "inskrift",
+	"version": "0.1.0",
+	"description": "A small, modern, and privacy-friendly guestbook plugin for WordPress.",
+	"author": "Jim Saari",
+	"license": "GPL-2.0-or-later",
+	"private": true,
+	"engines": {
+		"node": ">=24",
+		"npm": ">=11"
+	},
+	"scripts": {
+		"build": "wp-scripts build --source-path=blocks",
+		"check": "npm run format:check && npm run lint:js && npm run lint:css && npm run build",
+		"env:destroy": "wp-env destroy",
+		"env:start": "wp-env start",
+		"env:start:minimum": "wp-env start --config=.wp-env.minimum.json",
+		"env:stop": "wp-env stop",
+		"env:stop:minimum": "wp-env stop --config=.wp-env.minimum.json",
+		"format": "wp-scripts format blocks",
+		"format:check": "wp-scripts format --check blocks",
+		"lint:css": "wp-scripts lint-style blocks/**/*.scss",
+		"lint:js": "wp-scripts lint-js blocks",
+		"start": "wp-scripts start --source-path=blocks",
+		"test:php": "wp-env run cli --env-cwd=wp-content/plugins/inskrift composer test:integration",
+		"test:php:minimum": "wp-env run cli --config=.wp-env.minimum.json --env-cwd=wp-content/plugins/inskrift composer test:integration"
+	},
+	"devDependencies": {
+		"@wordpress/env": "^11.14.0",
+		"@wordpress/scripts": "^34.2.0"
+	},
+	"dependencies": {
+		"@wordpress/block-editor": "^17.0.0",
+		"@wordpress/blocks": "^15.27.0",
+		"@wordpress/components": "^40.0.0",
+		"@wordpress/i18n": "^6.27.0"
+	}
+}

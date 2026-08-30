@@ -1,0 +1,18 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/wp-env.json",
+	"core": "https://wordpress.org/wordpress-6.7.7.zip",
+	"phpVersion": "8.4",
+	"plugins": [],
+	"mappings": {
+		"wp-content/plugins/inskrift": "."
+	},
+	"port": 8890,
+	"testsEnvironment": false,
+	"lifecycleScripts": {
+		"afterStart": "wp-env run cli --config=.wp-env.minimum.json wp theme activate twentytwentyfive && wp-env run cli --config=.wp-env.minimum.json wp plugin activate inskrift"
+	},
+	"config": {
+		"WP_DEBUG": true,
+		"SCRIPT_DEBUG": true
+	}
+}

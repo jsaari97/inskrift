@@ -1,0 +1,11 @@
+{
+	"intelephense.environment.phpVersion": "8.4.0",
+	"intelephense.files.maxSize": 10000000,
+	"intelephense.environment.includePaths": ["vendor/php-stubs/wordpress-stubs"],
+	"phpCodeSniffer.autoExecutable": true,
+	"phpCodeSniffer.standard": "Automatic",
+	"[php]": {
+		"editor.defaultFormatter": "obliviousharmony.vscode-php-codesniffer",
+		"editor.formatOnSave": true
+	}
+}

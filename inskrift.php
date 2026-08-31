@@ -28,5 +28,8 @@ $inskrift_autoloader = INSKRIFT_PLUGIN_DIR . 'vendor/autoload.php';
 
 if ( is_readable( $inskrift_autoloader ) ) {
 	require $inskrift_autoloader;
+
+	register_activation_hook( INSKRIFT_PLUGIN_FILE, array( Inskrift\Database\Schema::class, 'install' ) );
+
 	Inskrift\Plugin::boot();
 }

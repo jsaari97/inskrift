@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace Inskrift;
 
 use Inskrift\Blocks\GuestbookRenderer;
+use Inskrift\Database\Schema;
 
 /**
  * Connects the plugin to WordPress.
@@ -19,6 +20,8 @@ final class Plugin {
 	 * Adds the plugin hooks.
 	 */
 	public static function boot(): void {
+		add_action( 'plugins_loaded', array( Schema::class, 'maybe_update' ) );
+
 		add_action( 'init', array( self::class, 'register_blocks' ) );
 	}
 
